@@ -235,8 +235,8 @@ with tf.Session() as sess:
             print(t.strftime("%Y-%m-%d %H:%M:%S", currentTime))
             train_writer.add_summary(mer, now_epoch)
             saver.save(sess, './genre_ckpts/genre_Ckpt', global_step=now_epoch)
-			if i % 462 == 0:
-				now_epoch += 1
+            if i % 462 == 0:
+                now_epoch += 1
             print("--------------------------------------------------------------------------------")
             '''
             t_acc = 0.0
