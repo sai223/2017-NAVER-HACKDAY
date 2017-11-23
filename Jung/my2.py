@@ -3,9 +3,6 @@ import tensorflow as tf
 from functions import *
 
 
-
-LOG_PATH = "./log/"
-
 def list_tfrecord_file(file_list):
     tfrecord_list = []
     for i in range(len(file_list)):
@@ -69,7 +66,7 @@ def read_and_decode(filename_queue):
     return image, label, filename
 
 num_epochs = 1
-batch_size = 256
+batch_size = 512
 num_threads = 2
 min_after_dequeue = 1000
 capacity = min_after_dequeue + 3 * batch_size
@@ -172,13 +169,14 @@ with tf.Session() as sess:
         sess.run(train, feed_dict={keep_prob: 0.5, x: batch_x, y: batch_y})
         
         temp_loss = sess.run(cross_entropy, feed_dict={keep_prob: 1.0, x: batch_x, y: batch_y})
-        loss_log.append(temp_loss)
+        #loss_log.append(temp_loss)
         acc = sess.run(accuracy, feed_dict={keep_prob: 1.0, x: batch_x, y: batch_y})
-        if i % 10 == 0:
+        if i % 50 == 0:
             saver.save(sess, './genre_ckpts/genre_Ckpt', global_step=now_step)
             now_step += 1
         print("i:", i)
         print("acc:", acc)
+        print("loss:",temp_loss)
             
             
     
